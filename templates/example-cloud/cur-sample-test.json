@@ -6,6 +6,8 @@
   "focusVersion": "1.4",
   "dataset": "CostAndUsage",
   "source": {
+    "provider": "Example Cloud",
+    "billingSource": "Cost and Usage Report",
     "columns": [
       {
         "name": "invoice_id",
