@@ -1,0 +1,40 @@
+{
+  "indexVersion": 1,
+  "updatedAt": "2026-11-18",
+  "groups": [
+    {
+      "id": "cloud",
+      "name": "Cloud Service Providers",
+      "description": "Infrastructure and platform cloud providers."
+    },
+    {
+      "id": "saas",
+      "name": "SaaS",
+      "description": "Software-as-a-service vendors that publish usage or billing exports."
+    },
+    {
+      "id": "ai",
+      "name": "AI and LLM Providers",
+      "description": "Model and inference providers billed by tokens, requests or compute."
+    },
+    {
+      "id": "data-center",
+      "name": "Data Center and Private Cloud",
+      "description": "On-premises, colocation and private cloud cost sources."
+    }
+  ],
+  "templates": [
+    {
+      "id": "example-cloud-cur-focus-1.4",
+      "name": "Example Cloud CUR to FOCUS 1.4",
+      "description": "Fake sample for testing the template loader. Do not use for real data.",
+      "group": "cloud",
+      "provider": "Example Cloud",
+      "billingSource": "Cost and Usage Report",
+      "focusVersion": "1.4",
+      "dataset": "CostAndUsage",
+      "path": "example-cloud/cur-sample-test.json",
+      "updatedAt": "2026-11-18"
+    }
+  ]
+}

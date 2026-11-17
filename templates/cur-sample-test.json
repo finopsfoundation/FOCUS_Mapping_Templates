@@ -1,0 +1,531 @@
+{
+  "$schema": "https://raw.githubusercontent.com/finopsfoundation/FOCUS-Mapper/main/packages/core/schema/focus-mapping.schema.json",
+  "configVersion": 1,
+  "name": "01_fully_matching_cloud_billing.csv → FOCUS 1.4",
+  "createdAt": "2026-11-17T19:12:09.132Z",
+  "focusVersion": "1.4",
+  "dataset": "CostAndUsage",
+  "source": {
+    "columns": [
+      {
+        "name": "invoice_id",
+        "type": "DateTime",
+        "examples": [
+          "INV-1001",
+          "INV-1002",
+          "INV-1003"
+        ]
+      },
+      {
+        "name": "billing_account",
+        "type": "DateTime",
+        "examples": [
+          "BA-UK-001",
+          "BA-EU-002",
+          "BA-AZ-003"
+        ]
+      },
+      {
+        "name": "provider",
+        "type": "String",
+        "examples": [
+          "AWS",
+          "GCP",
+          "Azure"
+        ]
+      },
+      {
+        "name": "service",
+        "type": "String",
+        "examples": [
+          "EC2",
+          "S3",
+          "BigQuery"
+        ]
+      },
+      {
+        "name": "sku",
+        "type": "String",
+        "examples": [
+          "m7i.large",
+          "Standard Storage",
+          "Analysis"
+        ]
+      },
+      {
+        "name": "customer",
+        "type": "String",
+        "examples": [
+          "Acme Ltd",
+          "Northwind",
+          "Globex"
+        ]
+      },
+      {
+        "name": "department",
+        "type": "String",
+        "examples": [
+          "Engineering",
+          "Marketing",
+          "Data"
+        ]
+      },
+      {
+        "name": "region",
+        "type": "String",
+        "examples": [
+          "eu-west-2",
+          "europe-west2",
+          "uksouth"
+        ]
+      },
+      {
+        "name": "resource_id",
+        "type": "String",
+        "examples": [
+          "i-001",
+          "bucket-assets",
+          "bq-job-812"
+        ]
+      },
+      {
+        "name": "usage_start",
+        "type": "DateTime",
+        "dateFormat": "YYYY-MM-DD",
+        "examples": [
+          "2026-06-01",
+          "2026-06-02",
+          "2026-06-03"
+        ]
+      },
+      {
+        "name": "usage_end",
+        "type": "DateTime",
+        "dateFormat": "YYYY-MM-DD",
+        "examples": [
+          "2026-06-01",
+          "2026-06-30",
+          "2026-06-02"
+        ]
+      },
+      {
+        "name": "usage_quantity",
+        "type": "Decimal",
+        "examples": [
+          "12.5",
+          "5200",
+          "780"
+        ]
+      },
+      {
+        "name": "usage_unit",
+        "type": "String",
+        "examples": [
+          "Hours",
+          "GB-Month",
+          "GB"
+        ]
+      },
+      {
+        "name": "list_cost",
+        "type": "Decimal",
+        "examples": [
+          "1.25",
+          "119.6",
+          "3.9"
+        ]
+      },
+      {
+        "name": "discount",
+        "type": "Decimal",
+        "examples": [
+          "-0.15",
+          "-10.0",
+          "0"
+        ]
+      },
+      {
+        "name": "credits",
+        "type": "Decimal",
+        "examples": [
+          "0",
+          "-5.0",
+          "-0.4"
+        ]
+      },
+      {
+        "name": "effective_cost",
+        "type": "Decimal",
+        "examples": [
+          "1.1",
+          "104.6",
+          "3.5"
+        ]
+      },
+      {
+        "name": "currency",
+        "type": "String",
+        "currency": "USD",
+        "examples": [
+          "USD"
+        ]
+      },
+      {
+        "name": "tax_amount",
+        "type": "Decimal",
+        "examples": [
+          "0.22",
+          "20.92",
+          "0.7"
+        ]
+      },
+      {
+        "name": "tags",
+        "type": "String",
+        "examples": [
+          "env=prod;team=platform",
+          "env=prod;team=web",
+          "env=prod;team=data"
+        ]
+      }
+    ]
+  },
+  "columns": {
+    "AllocatedMethodDetails": {
+      "status": "unmapped",
+      "featureLevel": "Recommended"
+    },
+    "AllocatedMethodId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "AllocatedResourceId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "AllocatedResourceName": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "AllocatedTags": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "AvailabilityZone": {
+      "status": "unmapped",
+      "featureLevel": "Recommended"
+    },
+    "BilledCost": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "BillingAccountId": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "billing_account",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "BillingAccountName": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "BillingAccountType": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "BillingCurrency": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "currency",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "BillingPeriodEnd": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "BillingPeriodStart": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "CapacityReservationId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CapacityReservationStatus": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ChargeCategory": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ChargeClass": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ChargeDescription": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ChargeFrequency": {
+      "status": "unmapped",
+      "featureLevel": "Recommended"
+    },
+    "ChargePeriodEnd": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "usage_end",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "ChargePeriodStart": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "usage_start",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "CommitmentDiscountCategory": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountName": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountQuantity": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountStatus": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountType": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentDiscountUnit": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "CommitmentProgramEligibilityDetails": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ConsumedQuantity": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "usage_quantity",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "ConsumedUnit": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "usage_unit",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "ContractApplied": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ContractedCost": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ContractedUnitPrice": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "EffectiveCost": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "effective_cost",
+        "origin": "auto",
+        "confidence": 1
+      }
+    },
+    "HostProviderName": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "InvoiceDetailId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "InvoiceId": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "invoice_id",
+        "origin": "auto",
+        "confidence": 1
+      }
+    },
+    "InvoiceIssuerName": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ListCost": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "list_cost",
+        "origin": "auto",
+        "confidence": 1
+      }
+    },
+    "ListUnitPrice": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingCategory": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingCurrency": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingCurrencyContractedUnitPrice": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingCurrencyEffectiveCost": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingCurrencyListUnitPrice": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "PricingQuantity": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "PricingUnit": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "RegionId": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "region",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "RegionName": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ResourceId": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "resource_id",
+        "origin": "auto",
+        "confidence": 1
+      }
+    },
+    "ResourceName": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ResourceType": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "ServiceCategory": {
+      "status": "unmapped",
+      "featureLevel": "Mandatory"
+    },
+    "ServiceName": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "service",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "ServiceProviderName": {
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "provider",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "ServiceSubcategory": {
+      "status": "unmapped",
+      "featureLevel": "Recommended"
+    },
+    "SkuId": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "sku",
+        "origin": "auto",
+        "confidence": 0.9
+      }
+    },
+    "SkuMeter": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "SkuPriceDetails": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "SkuPriceId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "SubAccountId": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "SubAccountName": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "SubAccountType": {
+      "status": "unmapped",
+      "featureLevel": "Conditional"
+    },
+    "Tags": {
+      "status": "mapped",
+      "featureLevel": "Conditional",
+      "from": {
+        "source": "tags",
+        "origin": "auto",
+        "confidence": 1
+      }
+    }
+  },
+  "blocks": {}
+}
