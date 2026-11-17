@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/finopsfoundation/FOCUS-Mapper/main/packages/core/schema/focus-mapping.schema.json",
   "configVersion": 1,
   "name": "01_fully_matching_cloud_billing.csv → FOCUS 1.4",
-  "createdAt": "2026-11-17T19:12:09.132Z",
+  "createdAt": "2026-11-17T20:56:12.407Z",
   "focusVersion": "1.4",
   "dataset": "CostAndUsage",
   "source": {
@@ -216,8 +216,11 @@
       "featureLevel": "Recommended"
     },
     "BilledCost": {
-      "status": "unmapped",
-      "featureLevel": "Mandatory"
+      "status": "mapped",
+      "featureLevel": "Mandatory",
+      "from": {
+        "source": "list_cost"
+      }
     },
     "BillingAccountId": {
       "status": "mapped",
@@ -281,7 +284,7 @@
       "status": "mapped",
       "featureLevel": "Mandatory",
       "from": {
-        "source": "usage_end",
+        "block": "date-reformat-usage-end",
         "origin": "auto",
         "confidence": 0.9
       }
@@ -290,7 +293,7 @@
       "status": "mapped",
       "featureLevel": "Mandatory",
       "from": {
-        "source": "usage_start",
+        "block": "date-reformat-usage-start",
         "origin": "auto",
         "confidence": 0.9
       }
@@ -391,7 +394,7 @@
       "status": "mapped",
       "featureLevel": "Mandatory",
       "from": {
-        "source": "list_cost",
+        "block": "math-list-with-discounts-credits",
         "origin": "auto",
         "confidence": 1
       }
@@ -466,9 +469,7 @@
       "status": "mapped",
       "featureLevel": "Mandatory",
       "from": {
-        "source": "service",
-        "origin": "auto",
-        "confidence": 0.9
+        "source": "service"
       }
     },
     "ServiceProviderName": {
@@ -527,5 +528,83 @@
       }
     }
   },
-  "blocks": {}
+  "blocks": {
+    "date-reformat-usage-start": {
+      "type": "dateReformat",
+      "params": {
+        "inputFormat": "YYYY-MM-DD",
+        "outputFormat": "iso"
+      },
+      "inputs": [
+        {
+          "source": "usage_start"
+        }
+      ],
+      "note": "Input date is in YYYY-MM-DD not ISO8601"
+    },
+    "date-reformat-usage-end": {
+      "type": "dateReformat",
+      "params": {
+        "inputFormat": "YYYY-MM-DD",
+        "outputFormat": "iso"
+      },
+      "inputs": [
+        {
+          "source": "usage_end"
+        }
+      ],
+      "note": "Input date is in YYYY-MM-DD not ISO8601"
+    },
+    "math-list-with-discounts": {
+      "type": "arithmetic",
+      "params": {
+        "op": "+"
+      },
+      "inputs": [
+        {
+          "source": "list_cost"
+        },
+        {
+          "source": "discount"
+        }
+      ]
+    },
+    "math-list-with-discounts-credits": {
+      "type": "arithmetic",
+      "params": {
+        "op": "+"
+      },
+      "inputs": [
+        {
+          "block": "math-list-with-discounts"
+        },
+        {
+          "source": "credits"
+        }
+      ],
+      "dependsOn": [
+        "math-list-with-discounts"
+      ]
+    }
+  },
+  "layout": {
+    "blocks": {
+      "date-reformat-usage-start": {
+        "x": 666,
+        "y": 609
+      },
+      "date-reformat-usage-end": {
+        "x": 663,
+        "y": 691
+      },
+      "math-list-with-discounts": {
+        "x": 544,
+        "y": 935
+      },
+      "math-list-with-discounts-credits": {
+        "x": 671,
+        "y": 1016
+      }
+    }
+  }
 }
